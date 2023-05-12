@@ -27,7 +27,8 @@ def stats():
         if wac < MINPOWER:
             raise Exception()
         eff = wac/wdc * 100
-        print(f"{wac},{wdc},{eff:.1f}%")
+        c = modbus.read_input_registers(register_addr=3041, quantity=1)[0]/10
+        print(f"{wac},{wdc},{eff:.1f}%,{c}")
     except Exception: 
         print("0,0,0%")
     
@@ -35,7 +36,7 @@ def stats():
     return
 
 if __name__ == "__main__":
-    print("Time, W AC, W DC, efficiency")
+    print("Time, W AC, W DC, efficiency, oC")
     while 1:
         stats()
         # repeat every 3m, allowing for 1s execution time
