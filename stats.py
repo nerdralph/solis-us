@@ -21,14 +21,16 @@ def stats():
             PVIP, PVSN, port=8899, mb_slave_id=1, verbose=False
         )
         # offset address by -1 for function 4
-        power = modbus.read_input_registers(register_addr=3005, quantity=3)
-        wac = power[0]
-        wdc = power[2]
-        if wac < MINPOWER:
+        out = modbus.read_input_registers(register_addr=3005, quantity=10)
+        wac = out[0]
+        wdc = out[2]
+        if wdc == 0:
             raise Exception()
         eff = wac/wdc * 100
+        # 3015 = energy today
+        kWh = out[9]/10
         c = modbus.read_input_registers(register_addr=3041, quantity=1)[0]/10
-        print(f"{wac},{wdc},{eff:.1f}%,{c}")
+        print(f"{wac},{wdc},{eff:.1f}%,{c},{kWh}")
     except Exception: 
         print("0,0,0%")
     
@@ -36,9 +38,9 @@ def stats():
     return
 
 if __name__ == "__main__":
-    print("Time, W AC, W DC, efficiency, oC")
+    print("Time, W AC, W DC, efficiency, oC,kWh")
     while 1:
         stats()
-        # repeat every 3m, allowing for 1s execution time
-        time.sleep(299)
+        # repeat every 3m, allowing for 2s fetch time
+        time.sleep(298)
 
