@@ -10,13 +10,14 @@ import serial.tools.list_ports as lp
 import json, math, sys, time
 
 SADDR = 1                               # default slave address
+DBG = 0                                 # debug
 
 if len(sys.argv) == 1:
     dev = lp.comports()[0].device
 else:
     dev = sys.argv[1]
 
-print("using port", dev)
+if DBG: print("using port", dev)
 pzem = ModbusSerialClient(port=dev, baudrate=9600) 
 pzem.connect()
 
