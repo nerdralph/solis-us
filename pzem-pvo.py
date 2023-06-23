@@ -39,6 +39,7 @@ data={
     "d":date,
     "t":hm,
     "v1":energy,
+    "v2":power,
     "v6":volt,
     "v5":amp,
     }
