@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # 2023 Ralph Doncaster
 # reads from Peacefair PZEM-014 and PZEM-016 power meters
 # http://en.peacefair.cn/products/601.html
