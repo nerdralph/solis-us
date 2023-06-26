@@ -9,6 +9,8 @@ import sys
 import time
 import umodbus.exceptions
 
+# Solis inverters update stats every 1s
+
 # Solis MODBUS registers fn code 0x04
 # 3005 = U32 active power(AC) 1W
 #   06 = U16 active power LSB16
@@ -32,6 +34,7 @@ def stats():
         )
         # offset address by -1 for function 4
         # subtract 6 from address for out[] index
+        # todo: add 1s timeout
         out = modbus.read_input_registers(register_addr=3005, quantity=37)
         wac = out[0]
         wdc = out[2]
