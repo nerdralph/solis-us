@@ -28,8 +28,8 @@ pzem.connect()
 # read 10 regs starting at address 0
 rsp = pzem.read_input_registers(0, count=10, slave=SADDR)
 #print(rsp.registers)
-volt = round(rsp.registers[0]/10, 1)
-amp = round(rsp.registers[1]*0.001, 3)
+volt = rsp.registers[0]/10
+amp = rsp.registers[1]/1000
 power = round(rsp.registers[3]/10 + rsp.registers[4]*6553.6)
 energy = rsp.registers[5]
 now = datetime.now()
