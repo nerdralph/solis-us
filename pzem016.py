@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+# requires python3, pymodbus, and pyserial
 #by Bhuris Mun
 # 2023 rewrite by Ralph Doncaster for pymodbus 3.x
 # reads from Peacefair PZEM-014 and PZEM-016 power meters
@@ -25,20 +26,19 @@ pzem.connect()
 rsp = pzem.read_input_registers(0, count=10, slave=SADDR)
 #print(rsp.registers)
 volt = rsp.registers[0]/10
-amp = rsp.registers[1]*0.001
+amp = rsp.registers[1]/1000
 power = rsp.registers[3]/10 + rsp.registers[4]*6553.6
-energy = rsp.registers[5]*0.001
+energy = rsp.registers[5]/1000
 freq = rsp.registers[7]/10
-pwfac = rsp.registers[8]*0.01
+pwfac = rsp.registers[8]/100
 alarm = rsp.registers[9]
 data={
     "volt":volt,
     "amp":amp,
-    "power(W)":power,
-    "energy(kWh)":energy,
+    "watt":power,
+    "kWh":energy,
     "freq":freq,
     "pwfac":pwfac,
-    "status":alarm
     }
 dataff=json.dumps(data)             # format data to json
 print(dataff)
