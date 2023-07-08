@@ -8,7 +8,7 @@
 from pymodbus.client import ModbusSerialClient
 from pymodbus.register_read_message import *
 import serial.tools.list_ports as lp
-import json, math, sys, time
+import math, sys, time
 
 SADDR = 1                               # default slave address
 DBG = 0                                 # debug
@@ -40,5 +40,4 @@ data={
     "freq":freq,
     "pwfac":pwfac,
     }
-dataff=json.dumps(data)             # format data to json
-print(dataff)
+print(data)
