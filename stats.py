@@ -1,6 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 # solis 1P-XK-4G-US inverter status
+# requires pysolarmanv5
+# https://github.com/jmccrohan/pysolarmanv5
 
 from datetime import datetime
 import os
