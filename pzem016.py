@@ -33,11 +33,11 @@ freq = rsp.registers[7]/10
 pwfac = rsp.registers[8]/100
 alarm = rsp.registers[9]
 data={
-    "volt":volt,
-    "amp":amp,
-    "watt":power,
+    "V":volt,
+    "A":amp,
+    "W":power,
     "kWh":energy,
-    "freq":freq,
-    "pwfac":pwfac,
+    "Hz":freq,
+    "pfac":pwfac,
     }
 print(data)
