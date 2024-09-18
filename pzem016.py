@@ -8,7 +8,7 @@
 from pymodbus.client import ModbusSerialClient
 from pymodbus.register_read_message import *
 import serial.tools.list_ports as lp
-import math, sys, time
+import sys, time
 
 SADDR = 1                               # default slave address
 DBG = 0                                 # debug
@@ -27,7 +27,7 @@ rsp = pzem.read_input_registers(0, count=10, slave=SADDR)
 #print(rsp.registers)
 volt = rsp.registers[0]/10
 amp = rsp.registers[1]/1000
-power = rsp.registers[3]/10 + rsp.registers[4]*6553.6
+power = round(rsp.registers[3]/10 + rsp.registers[4]*6553.6)
 energy = rsp.registers[5]/1000
 freq = rsp.registers[7]/10
 pwfac = rsp.registers[8]/100
